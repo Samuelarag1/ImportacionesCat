@@ -9,15 +9,32 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import ProductsPage from "../products/page";
-import UsersPage from "../users/page";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import { MdChevronRight } from "react-icons/md";
 import Sidebar from "@/components/Sidebar";
+import { jwtDecode } from "jwt-decode";
 
 function Administration() {
   const [toggle, setToggle] = useState<boolean>(false);
+
+  useEffect(() => {
+    const confirmAdmin = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const decoded = jwtDecode(token);
+          console.log(decoded);
+        } catch (error) {
+          console.error("Error decodificando el token:", error);
+        }
+      } else {
+        console.log("No hay token disponible");
+      }
+    };
+
+    confirmAdmin();
+  }, []);
   return (
     <>
       <div className="bg-primary text-slate-300">
@@ -46,15 +63,9 @@ function Administration() {
             <Tab>Banners</Tab>
           </TabList>
           <TabPanels className="text-white mb-0">
-            <TabPanel>
-              <UsersPage />
-            </TabPanel>
-            <TabPanel>
-              <ProductsPage />
-            </TabPanel>
-            <TabPanel>
-              <ProductsPage />
-            </TabPanel>
+            <TabPanel>{/* <UsersPage /> */}</TabPanel>
+            <TabPanel>{/* <ProductsPage /> */}</TabPanel>
+            <TabPanel>{/* <ProductsPage /> */}</TabPanel>
           </TabPanels>
         </Tabs>
       </div>

@@ -4,16 +4,65 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import { Spinner } from "@chakra-ui/react";
 
 const LoginPage = () => {
   const [toggle, setToggle] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const login = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: user.email,
+          password: user.password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.access_token) {
+          localStorage.setItem("token", data.access_token);
+        }
+        setLoading(true);
+
+        setTimeout(() => {
+          window.location.href = "/profile";
+        }, 500);
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || "Error en el login");
+      }
+    } catch (error) {
+      setErrorMessage("Error en el servidor");
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
         <Header onToggle={() => setToggle(!toggle)} />
         <div className="flex-grow flex flex-col justify-center items-center bg-primary shadow-2xl shadow-black">
-          <div className="m-4 w-full max-w-sm p-4  border  rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
-            <form className="space-y-6" action="#">
+          <div className="m-4 w-full max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
+            <form className="space-y-6" onSubmit={login}>
               <h5 className="text-xl font-medium text-white text-center md:text-left">
                 Iniciar sesión
               </h5>
@@ -24,7 +73,8 @@ const LoginPage = () => {
                 <input
                   type="email"
                   name="email"
-                  id="email"
+                  value={user.email}
+                  onChange={handleOnChange}
                   className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
                   placeholder="email@email.com"
                   required
@@ -37,31 +87,16 @@ const LoginPage = () => {
                 <input
                   type="password"
                   name="password"
-                  id="password"
+                  value={user.password}
+                  onChange={handleOnChange}
                   placeholder="••••••••"
                   className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
                   required
                 />
               </div>
-              <div className="flex items-start justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      type="checkbox"
-                      value=""
-                      className="w-4 h-4 border rounded focus:ring-3 focus:ring-blue-300 bg-gray-700 border-gray-600  ring-offset-gray-800 focus:ring-offset-gray-800"
-                      required
-                    />
-                  </div>
-                  <label className="ms-2 text-sm font-medium text-gray-300">
-                    Recuérdame
-                  </label>
-                </div>
-                <a href="#" className="text-sm hover:underline text-blue-500">
-                  Olvidaste tu contraseña
-                </a>
-              </div>
+              {errorMessage && (
+                <div className="text-red-500 text-sm">{errorMessage}</div>
+              )}
               <button
                 type="submit"
                 className="w-full text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 "
@@ -70,9 +105,9 @@ const LoginPage = () => {
               </button>
               <div className="text-sm font-medium text-gray-300 text-center">
                 No tienes cuenta?{" "}
-                <a href="#" className="hover:underline text-blue-500">
-                  Crear cuenta
-                </a>
+                <Link href="/register">
+                  <p className="hover:underline text-blue-500">Crear cuenta</p>
+                </Link>
               </div>
             </form>
           </div>
@@ -80,6 +115,11 @@ const LoginPage = () => {
         <Footer />
         <Sidebar isOpen={toggle} onClose={() => setToggle(false)} />
       </div>
+      {loading && (
+        <div className="top-0 left-0 fixed z-50 h-screen w-screen flex items-center align-middle bg-black bg-opacity-80 justify-center">
+          <Spinner color="white" size={"xl"} />
+        </div>
+      )}
     </>
   );
 };

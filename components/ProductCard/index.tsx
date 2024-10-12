@@ -54,7 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <FaShoppingCart color="black" size={50} />
           </Button>
 
-          <button className="bg-blue-800 p-2 rounded-md w-full ml-2 text-xs text-white flex justify-center border border-black shadow-lg hover:bg-blue-600 transition duration-150">
+          <button className="bg-blue-800 p-2 rounded-md w-full ml-2 text-xs text-white flex justify-center items-center border border-black shadow-lg hover:bg-blue-600 transition duration-150">
             <Link href={`/products/${id}`}>Comprar</Link>
           </button>
         </div>
