@@ -53,7 +53,7 @@ const LoginPage = () => {
           setUser(data.user); // Establece el usuario en el store
           setLoading(true);
           setTimeout(() => {
-            window.location.href = "/profile"; // Redirige al perfil
+            window.location.href = "/admin/administration"; // Redirige al perfil
           }, 500);
         } else {
           console.error("Usuario no encontrado en la respuesta:", data);
