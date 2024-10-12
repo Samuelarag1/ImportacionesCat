@@ -5,19 +5,22 @@ import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { Spinner } from "@chakra-ui/react";
+import useUserStore from "@/store/userStore";
+import IUser from "@/Models/User";
 
 const LoginPage = () => {
+  const { user, setUser } = useUserStore();
   const [toggle, setToggle] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({
+  const [Users, setUsers] = useState<{ email: string; password: string }>({
     email: "",
     password: "",
   });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({
-      ...user,
+    setUsers({
+      ...Users,
       [e.target.name]: e.target.value,
     });
   };
@@ -32,27 +35,36 @@ const LoginPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: user.email,
-          password: user.password,
+          email: Users.email,
+          password: Users.password,
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
+        console.log("Respuesta del servidor:", data); // Verifica la estructura de la respuesta
+
         if (data.access_token) {
           localStorage.setItem("token", data.access_token);
         }
-        setLoading(true);
 
-        setTimeout(() => {
-          window.location.href = "/profile";
-        }, 500);
+        if (data.user) {
+          console.log("Usuario obtenido:", data.user); // Agrega este log para verificar
+          setUser(data.user); // Establece el usuario en el store
+          setLoading(true);
+          setTimeout(() => {
+            window.location.href = "/profile"; // Redirige al perfil
+          }, 500);
+        } else {
+          console.error("Usuario no encontrado en la respuesta:", data);
+          setErrorMessage("Usuario no encontrado en la respuesta.");
+        }
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error en el login");
       }
     } catch (error) {
-      setErrorMessage("Error en el servidor");
+      console.error("Error:", error);
     }
   };
 
@@ -73,7 +85,7 @@ const LoginPage = () => {
                 <input
                   type="email"
                   name="email"
-                  value={user.email}
+                  value={Users.email}
                   onChange={handleOnChange}
                   className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
                   placeholder="email@email.com"
@@ -87,7 +99,7 @@ const LoginPage = () => {
                 <input
                   type="password"
                   name="password"
-                  value={user.password}
+                  value={Users.password}
                   onChange={handleOnChange}
                   placeholder="••••••••"
                   className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"

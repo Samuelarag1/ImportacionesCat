@@ -3,11 +3,42 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { Spinner } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import useUserStore from "@/store/userStore";
+import IUser from "@/Models/User";
 
 function Profile() {
+  const { user } = useUserStore();
+
+  console.log(user);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState<boolean>(false);
+  const [userData, setUserData] = useState<IUser>();
+
+  const getAllProducts = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/users/${user?.email}`,
+        {
+          method: "GET",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error en la solicitud: " + response.statusText);
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
+
   return (
     <>
       <div className="bg-primary min-h-screen w-full">
