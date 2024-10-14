@@ -4,6 +4,7 @@ export default interface IUser {
   email?: string;
   address?: string;
   phone?: string;
-  roles?: string;
+  role?: string;
   password?: string;
+  profilePicture?: string;
 }

@@ -1,5 +1,6 @@
 import IUser from "@/Models/User";
 import { create } from "zustand";
+import { useEffect } from "react";
 
 interface UserState {
   user: IUser | null;
@@ -7,19 +8,32 @@ interface UserState {
   clearUser: () => void;
 }
 
-const useUserStore = create<UserState>((set) => {
-  const storedUser = localStorage.getItem("user");
-  return {
-    user: storedUser ? JSON.parse(storedUser) : null,
-    setUser: (user) => {
-      set({ user });
+const useUserStore = create<UserState>((set) => ({
+  user: null,
+  setUser: (user) => {
+    if (typeof window !== "undefined") {
       localStorage.setItem("user", JSON.stringify(user));
-    },
-    clearUser: () => {
-      set({ user: null });
+    }
+    set({ user });
+  },
+  clearUser: () => {
+    if (typeof window !== "undefined") {
       localStorage.removeItem("user");
-    },
-  };
-});
+    }
+    set({ user: null });
+  },
+}));
+
+// Hook para inicializar el estado del usuario desde localStorage
+export const useInitializeUserStore = () => {
+  const { setUser } = useUserStore();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [setUser]);
+};
 
 export default useUserStore;

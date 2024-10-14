@@ -6,7 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { Spinner } from "@chakra-ui/react";
 import useUserStore from "@/store/userStore";
-import IUser from "@/Models/User";
+import Cookies from "js-cookie";
 
 const LoginPage = () => {
   const { user, setUser } = useUserStore();
@@ -39,27 +39,31 @@ const LoginPage = () => {
           password: Users.password,
         }),
       });
-
+      console.log("object");
       if (response.ok) {
         const data = await response.json();
-        console.log("Respuesta del servidor:", data); // Verifica la estructura de la respuesta
+        console.log("Respuesta del servidor:", data);
 
+        // Guarda los datos del usuario en el store Zustand
+        setUser(data.user);
+
+        // Guarda el token en las cookies
         if (data.access_token) {
-          localStorage.setItem("token", data.access_token);
+          Cookies.set("token", data.access_token, {
+            expires: 1,
+            sameSite: "strict",
+          });
         }
 
-        if (data.user) {
-          console.log("Usuario obtenido:", data.user); // Agrega este log para verificar
-          setUser(data.user); // Establece el usuario en el store
+        // Si el usuario es admin, redirige al panel de administración
+        if (data.user.role === "admin") {
           setLoading(true);
           setTimeout(() => {
-            window.location.href = "/admin/administration"; // Redirige al perfil
+            window.location.href = "/admin/administration";
           }, 500);
-        } else {
-          console.error("Usuario no encontrado en la respuesta:", data);
-          setErrorMessage("Usuario no encontrado en la respuesta.");
         }
       } else {
+        // Manejando errores en caso de que el login falle
         const errorData = await response.json();
         setErrorMessage(errorData.message || "Error en el login");
       }

@@ -2,7 +2,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { Spinner } from "@chakra-ui/react";
+import { Avatar, Spinner, Wrap, WrapItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useUserStore from "@/store/userStore";
 import IUser from "@/Models/User";
@@ -44,8 +44,16 @@ function Profile() {
       <div className="bg-primary min-h-screen w-full">
         <Header onToggle={() => setToggle(!toggle)} />
         <div className="flex flex-col justify-center align-top items-center mt-5">
-          <div className="h-20 w-20 rounded-full border-black border-[2px]"></div>
-          <h4 className="text-center">Bienvenido a tu perfil</h4>
+          <Wrap>
+            <WrapItem className="flex flex-col align-middle items-center justify-center mb-2">
+              <Avatar
+                size="lg"
+                name={user?.name}
+                // src="https://bit.ly/dan-abramov"
+              />
+            </WrapItem>
+          </Wrap>
+          <h4 className="text-center">{user?.name}</h4>
         </div>
 
         <div className="absolute w-full bottom-0">
