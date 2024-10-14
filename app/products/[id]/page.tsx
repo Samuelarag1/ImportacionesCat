@@ -50,7 +50,7 @@ function ProductDetail() {
           </p>
         </div>
         <Header onToggle={() => setToggle(!toggle)} />
-        <Sidebar isOpen={toggle} onClose={() => setToggle(false)} />
+        <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
         <div className="font-sans bg-white">
           <div className="p-4 lg:max-w-7xl max-w-4xl mx-auto">
             <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] p-6 rounded-lg">

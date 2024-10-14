@@ -49,7 +49,7 @@ function Profile() {
               <Avatar
                 size="lg"
                 name={user?.name}
-                // src="https://bit.ly/dan-abramov"
+                src="https://bit.ly/dan-abramov"
               />
             </WrapItem>
           </Wrap>
@@ -58,7 +58,7 @@ function Profile() {
 
         <div className="absolute w-full bottom-0">
           <Footer />
-          <Sidebar isOpen={toggle} onClose={() => setToggle(false)} />
+          <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
         </div>
 
         {loading && (

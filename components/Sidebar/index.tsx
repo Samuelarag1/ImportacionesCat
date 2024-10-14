@@ -16,6 +16,7 @@ import {
   Button,
   Spinner,
   useDisclosure,
+  useTimeout,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
@@ -30,9 +31,9 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpenSideBar }) => {
   const [loading, setLoading] = useState(false);
   const { user, clearUser } = useUserStore();
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = React.useRef();
-  // Inicializamos el user desde localStorage
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
+
   useInitializeUserStore();
 
   const handleAdminClick = () => {
@@ -41,7 +42,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSideBar }) => {
       window.location.href = "/admin/administration";
     }, 500);
   };
-  const handleOnLogOut = () => {};
+
+  const handleOnLogOut = () => {
+    setLoading(true);
+    setTimeout(() => {
+      clearUser();
+      onClose();
+      setLoading(false);
+    }, 500);
+  };
 
   return (
     <>
@@ -55,19 +64,23 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSideBar }) => {
             Importaciones Catamarca
           </h1>
           <div className="flex justify-center gap-4 mt-5 font-body text-xs text-white">
-            <Wrap>
-              <WrapItem className="flex flex-col align-middle items-center justify-center mb-2">
-                {user?.profilePicture ? (
-                  ""
-                ) : (
-                  <Avatar bg="blue.500" icon={<FiUser fontSize="1.5rem" />} />
-                )}
-                <Link href={"/profile"} className="text-white">
-                  Ver perfil
-                </Link>
-              </WrapItem>
-            </Wrap>
-            {/* <Image width={30} height={30} src={"/cart.png"} alt="icon" /> */}
+            {user ? (
+              <Wrap>
+                <WrapItem className="flex flex-col align-middle items-center justify-center mb-2">
+                  {user?.profilePicture ? (
+                    // <Avatar bg="blue.500" icon={user?.profilePicture} />
+                    ""
+                  ) : (
+                    <Avatar bg="blue.500" icon={<FiUser fontSize="1.5rem" />} />
+                  )}
+                  <Link href={"/profile"} className="text-white">
+                    Ver perfil
+                  </Link>
+                </WrapItem>
+              </Wrap>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="text-center ">
@@ -239,7 +252,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSideBar }) => {
             </div>
           </div>
 
-          {/* <div className=" absolute bottom-0 w-full text-center text-sm">
+          <div className=" absolute bottom-0 w-full text-center text-sm">
             {" "}
             <div className="text-start mt-10">
               {user?.role != "admin" ? (
@@ -271,19 +284,23 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSideBar }) => {
                       <AlertDialogOverlay>
                         <AlertDialogContent>
                           <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                           Cerrar sesion
+                            Cerrar sesion
                           </AlertDialogHeader>
 
                           <AlertDialogBody>
-                            Are you sure? You can't undo this action afterwards.
+                            Estas a punto de cerrar sesion, estas seguro?
                           </AlertDialogBody>
 
                           <AlertDialogFooter>
                             <Button ref={cancelRef} onClick={onClose}>
-                              Cancel
+                              Cancelar
                             </Button>
-                            <Button colorScheme="red" onClick={onClose} ml={3}>
-                              Delete
+                            <Button
+                              colorScheme="red"
+                              onClick={handleOnLogOut}
+                              ml={3}
+                            >
+                              Cerrar sesion
                             </Button>
                           </AlertDialogFooter>
                         </AlertDialogContent>
@@ -315,7 +332,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSideBar }) => {
                 Importaciones Catamarca
               </p>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
       {loading && (

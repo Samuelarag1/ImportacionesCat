@@ -293,7 +293,7 @@ const Home: React.FC = () => {
           </CarouselProvider>
         </div>
       </div>
-      <Sidebar isOpen={toggle} onClose={() => setToggle(false)} />
+      <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
 
       <Footer />
     </main>

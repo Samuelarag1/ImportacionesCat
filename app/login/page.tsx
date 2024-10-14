@@ -129,7 +129,7 @@ const LoginPage = () => {
           </div>
         </div>
         <Footer />
-        <Sidebar isOpen={toggle} onClose={() => setToggle(false)} />
+        <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
       </div>
       {loading && (
         <div className="top-0 left-0 fixed z-50 h-screen w-screen flex items-center align-middle bg-black bg-opacity-80 justify-center">

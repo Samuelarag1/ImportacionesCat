@@ -70,7 +70,7 @@ function Administration() {
         </Tabs>
       </div>
 
-      <Sidebar isOpen={toggle} onClose={() => setToggle(false)} />
+      <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
     </>
   );
 }

@@ -91,7 +91,7 @@ const News: React.FC = () => {
         </div>
       </div>
 
-      <Sidebar isOpen={toggle} onClose={() => setToggle(false)} />
+      <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
     </main>
   );
 };

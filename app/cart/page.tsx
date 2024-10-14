@@ -143,7 +143,7 @@ const ShoppingCart: React.FC = () => {
         )}
       </div>
 
-      <Sidebar isOpen={toggle} onClose={() => setToggle(false)} />
+      <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
       <div className="absolute bottom-0 w-full">
         <Footer />
       </div>
