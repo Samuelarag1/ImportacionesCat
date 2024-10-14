@@ -1,17 +1,10 @@
 import React from "react";
 import { TiSocialInstagram } from "react-icons/ti";
 import { IoLogoWhatsapp } from "react-icons/io";
-import Router from "next/router";
+
 function Footer() {
   return (
-    <footer className="bg-secondary h-56 w-full">
-      <div className="flex justify-around bg-black h-10 items-center">
-        <a href="/login" className="text-white font-body text-lg">
-          Iniciar sesión
-        </a>
-        <p className="font-body text-white text-lg">Tu carrito (3)</p>
-      </div>
-
+    <footer className="bg-secondary h-fit w-full">
       <div className="text-white mt-5">
         <p className="text-md text-center text-white">Redes y contacto</p>
         <ul className="list-none text-xs flex justify-around mt-2">

@@ -275,11 +275,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSideBar }) => {
                     <Button colorScheme="red" onClick={onOpen}>
                       Cerrar sesion
                     </Button>
-
                     <AlertDialog
                       isOpen={isOpen}
                       leastDestructiveRef={cancelRef}
                       onClose={onClose}
+                      isCentered
                     >
                       <AlertDialogOverlay>
                         <AlertDialogContent>

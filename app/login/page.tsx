@@ -4,20 +4,20 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import { Spinner } from "@chakra-ui/react";
+import { Spinner, useToast } from "@chakra-ui/react";
 import useUserStore from "@/store/userStore";
 import Cookies from "js-cookie";
 
 const LoginPage = () => {
-  const { user, setUser } = useUserStore();
+  const { setUser } = useUserStore();
   const [toggle, setToggle] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const toast = useToast();
   const [Users, setUsers] = useState<{ email: string; password: string }>({
     email: "",
     password: "",
   });
-
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsers({
       ...Users,
@@ -39,15 +39,11 @@ const LoginPage = () => {
           password: Users.password,
         }),
       });
-      console.log("object");
       if (response.ok) {
         const data = await response.json();
-        console.log("Respuesta del servidor:", data);
 
-        // Guarda los datos del usuario en el store Zustand
         setUser(data.user);
 
-        // Guarda el token en las cookies
         if (data.access_token) {
           Cookies.set("token", data.access_token, {
             expires: 1,
@@ -55,20 +51,66 @@ const LoginPage = () => {
           });
         }
 
-        // Si el usuario es admin, redirige al panel de administración
         if (data.user.role === "admin") {
           setLoading(true);
           setTimeout(() => {
-            window.location.href = "/admin/administration";
-          }, 500);
+            toast({
+              title: "Inicia de sesion",
+              description: "Serás redirigido al panel de administracion.",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+
+            setTimeout(() => {
+              setLoading(false);
+              window.location.href = "/admin/administration";
+            }, 1000);
+          }, 1500);
+        } else if (data.user.role === "customer") {
+          setLoading(true);
+          setTimeout(() => {
+            toast({
+              title: "Inicio de sesion",
+              description:
+                "Serás redirigido a tu perfil, podes completar los datos de facturacion y mas..",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+
+            setTimeout(() => {
+              setLoading(false);
+              window.location.href = "/";
+            }, 1000);
+          }, 1500);
         }
       } else {
-        // Manejando errores en caso de que el login falle
-        const errorData = await response.json();
-        setErrorMessage(errorData.message || "Error en el login");
+        setLoading(true);
+        setTimeout(() => {
+          toast({
+            title: "Inicio de sesion",
+            description: "Error al iniciar sesion, verifique sus datos ",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        }, 1500);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
-    } catch (error) {
-      console.error("Error:", error);
+    } catch (error: any) {
+      setLoading(true);
+      setTimeout(() => {
+        toast({
+          title: "Inicio de  sesion",
+          description: error.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }, 1500);
     }
   };
 
@@ -77,7 +119,7 @@ const LoginPage = () => {
       <div className="flex flex-col min-h-screen">
         <Header onToggle={() => setToggle(!toggle)} />
         <div className="flex-grow flex flex-col justify-center items-center bg-primary shadow-2xl shadow-black">
-          <div className="m-4 w-full max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
+          <div className="m-4 w-[95%] max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
             <form className="space-y-6" onSubmit={login}>
               <h5 className="text-xl font-medium text-white text-center md:text-left">
                 Iniciar sesión
