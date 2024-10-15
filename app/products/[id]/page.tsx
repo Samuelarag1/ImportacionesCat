@@ -40,7 +40,12 @@ function ProductDetail() {
   // Aquí puedes añadir los logs para verificar los valores
   console.log("Product ID:", id);
   console.log("Fetched Product:", product);
-
+  const formatPrice = (price: string) => {
+    const numberPrice = parseFloat(price);
+    return `$${numberPrice
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00`;
+  };
   return (
     <>
       <main className="min-h-screen bg-primary">
@@ -60,10 +65,10 @@ function ProductDetail() {
                     <Image
                       src={product.imageUrl}
                       alt="Product"
-                      className="w-3/4 rounded object-cover mx-auto"
-                      objectFit="contain"
-                      width={100}
-                      height={400}
+                      className="w-full h-auto rounded object-cover"
+                      objectFit="cover"
+                      width={500}
+                      height={500}
                     />
                   )}
                 </div>
@@ -79,7 +84,9 @@ function ProductDetail() {
                 </div>
                 <div className="flex flex-wrap gap-4 mt-8">
                   <p className="text-gray-800 text-3xl font-bold">
-                    {product?.price ? `$${product.price}` : "No disponible"}
+                    {product?.price
+                      ? `${formatPrice(product.price)}`
+                      : "No disponible"}
                   </p>
                 </div>
                 <div className="mt-8">

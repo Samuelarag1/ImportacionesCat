@@ -3,14 +3,35 @@ import { IoMdClose } from "react-icons/io";
 import Link from "next/link";
 import { useState } from "react";
 import { BsCart } from "react-icons/bs";
-import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import useUserStore from "@/store/userStore";
 import { FiUser } from "react-icons/fi";
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { user } = useUserStore();
+  const { user, clearUser } = useUserStore();
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleLogOut = () => {
+    clearUser();
+  };
+  const categories = {
+    Hombres: "mens",
+    Mujeres: "womens",
+    Deportivo: "sports",
+    Accesorios: "accessories",
+    Variedad: "variety",
   };
 
   return (
@@ -45,12 +66,52 @@ const Header = () => {
                   ""
                 ) : (
                   <>
-                    <BsCart size={30} />{" "}
-                    <Avatar
-                      bg="blue.500"
-                      icon={<FiUser size={20} />}
-                      size={"sm"}
-                    />
+                    <Menu>
+                      <MenuButton
+                        as={IconButton}
+                        icon={<BsCart size={30} />}
+                        aria-label="Options"
+                        variant="outline"
+                      ></MenuButton>
+                      <MenuList>
+                        <MenuItem>Carrito</MenuItem>
+                      </MenuList>
+                    </Menu>
+                    <Menu>
+                      <MenuButton
+                        as={IconButton}
+                        aria-label="Options"
+                        variant="outline"
+                      >
+                        <Avatar
+                          bg="blue.500"
+                          icon={<FiUser size={20} />}
+                          size={"sm"}
+                        />
+                      </MenuButton>
+                      <MenuList>
+                        {user ? (
+                          <>
+                            <MenuItem as="a" href="/login">
+                              Iniciar sesion
+                            </MenuItem>
+                          </>
+                        ) : (
+                          <>
+                            <MenuItem>Ir a mi perfil</MenuItem>
+                            <MenuItem>Mis compras</MenuItem>
+                            <MenuItem onClick={handleLogOut}>
+                              Cerrar sesion
+                            </MenuItem>
+                          </>
+                        )}
+                        {user.role == "admin" ? (
+                          <MenuItem>Panel de administracion</MenuItem>
+                        ) : (
+                          ""
+                        )}
+                      </MenuList>
+                    </Menu>
                   </>
                 )}
               </WrapItem>
@@ -68,7 +129,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`fixed top-0 left-0 h-full w-3/4 bg-gray-200 z-40 transform  ${
+        className={`fixed top-0 left-0 h-full w-3/4 bg-gray-50 z-40 transform  ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full "
         } transition-transform duration-300 ease-in-out`}
       >
@@ -76,70 +137,17 @@ const Header = () => {
           <IoMdClose size={30} color="black" />
         </button>
 
-        <div className="flex flex-col p-8 space-y-6 mt-12">
-          {["mens", "womens", "kids", "sports", "accessories"].map(
-            (category) => (
-              <div key={category}>
-                <Link
-                  href={`/section/${category.toLowerCase()}`}
-                  className="text-xl font-bold"
-                >
-                  {category}
-                </Link>
-              </div>
-            )
-          )}
+        <div className="flex flex-col p-8 space-y-6 mt-20">
+          {Object.entries(categories).map(([category, slug]) => (
+            <div key={category}>
+              <Link href={`/section/${slug}`} className="text-xl font-bold">
+                {category}
+              </Link>
+            </div>
+          ))}
+          <Divider orientation="horizontal" />
         </div>
       </div>
-
-      <header className="hidden lg:bg-gray-200 lg:flex lg:items-center lg:justify-around lg:px-8 lg:h-16 lg:border-b-4 lg:border-black">
-        <nav className="flex space-x-8 z-50">
-          {["Hombres", "Mujeres", "Niños", "Deportes", "Accesorios"].map(
-            (category) => (
-              <div key={category} className="group relative">
-                <Link
-                  href={`/section/${category.toLowerCase()}`}
-                  className="text-lg text-black hover:underline"
-                >
-                  {category}
-                </Link>
-                <div className="absolute left-0 hidden group-hover:block bg-secondary text-black text-sm mt-1 p-2 rounded shadow-lg">
-                  <Link
-                    href={`/section/${category.toLowerCase()}/new`}
-                    className="block hover:underline"
-                  >
-                    Nuevos ingresos
-                  </Link>
-                  <Link
-                    href={`/section/${category.toLowerCase()}/shoes`}
-                    className="block hover:underline"
-                  >
-                    Calzado
-                  </Link>
-                  <Link
-                    href={`/section/${category.toLowerCase()}/clothes`}
-                    className="block hover:underline"
-                  >
-                    Ropa
-                  </Link>
-                  <Link
-                    href={`/section/${category.toLowerCase()}/accesories`}
-                    className="block hover:underline"
-                  >
-                    Accesorios
-                  </Link>
-                  <Link
-                    href={`/section/${category.toLowerCase()}`}
-                    className="block hover:underline"
-                  >
-                    Ver todo {category}
-                  </Link>
-                </div>
-              </div>
-            )
-          )}
-        </nav>
-      </header>
     </>
   );
 };

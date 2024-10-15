@@ -47,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
           <div>
             <Link
-              href="#"
+              href={`/products/${id}`}
               className="bg-gray-700 p-3 rounded-full flex items-center justify-center"
             >
               <GoEye size={25} color="white" />
