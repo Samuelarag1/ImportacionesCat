@@ -30,8 +30,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className="relative group">
         {" "}
         <Image
-          width={100}
-          height={100}
+          width={1000}
+          height={1000}
           className="object-cover w-full h-48 lg:h-80"
           src={imageSrc}
           alt="NIKE AIR"

@@ -92,16 +92,16 @@ const Header = () => {
                       <MenuList>
                         {user ? (
                           <>
-                            <MenuItem as="a" href="/login">
-                              Iniciar sesion
-                            </MenuItem>
-                          </>
-                        ) : (
-                          <>
                             <MenuItem>Ir a mi perfil</MenuItem>
                             <MenuItem>Mis compras</MenuItem>
                             <MenuItem onClick={handleLogOut}>
                               Cerrar sesion
+                            </MenuItem>
+                          </>
+                        ) : (
+                          <>
+                            <MenuItem as="a" href="/login">
+                              Iniciar sesion
                             </MenuItem>
                           </>
                         )}

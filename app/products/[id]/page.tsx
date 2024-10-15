@@ -64,8 +64,8 @@ function ProductDetail() {
                       alt="Product"
                       className="w-full h-auto rounded object-cover"
                       objectFit="cover"
-                      width={500}
-                      height={500}
+                      width={1500}
+                      height={1500}
                     />
                   )}
                 </div>
@@ -126,7 +126,7 @@ function ProductDetail() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 w-full">
+        <div className=" bottom-0 w-full">
           <Footer />
         </div>
       </main>

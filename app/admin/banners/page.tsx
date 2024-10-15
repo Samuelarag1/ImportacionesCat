@@ -20,8 +20,9 @@ import Sidebar from "@/components/Sidebar";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { BsPencilFill, BsTrash3Fill } from "react-icons/bs";
 import IProduct from "@/Models/Products";
+import { GoEye } from "react-icons/go";
 
-const UsersPage = () => {
+const BannersPage = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -106,46 +107,50 @@ const UsersPage = () => {
     //   body: formData,
     // });
   };
-
   return (
     <>
       <div className="h-screen bg-primary text-black">
         <div className="w-full flex justify-center">
-          <Button onClick={onOpen}>Agregar Usuario</Button>
+          <Button onClick={onOpen}>Agregar Banner</Button>
         </div>
         <table className="w-full text-left text-white bg-[#15438c] bg-opacity-80 mt-2 text-xs">
           <thead>
             <tr>
-              <th className="p-2 border-b">Nombre</th>
-              <th className="p-2 border-b">Permisos</th>
+              <th className="p-2 border-b">Titulo</th>
+              <th className="p-2 border-b">Categoria</th>
               <th className="p-2 border-b">Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="p-2 border-b">Admin</td>
-              <td className="p-2 border-b">administrador</td>
-              <td className="p-2 border-b"></td>
-            </tr>
-            <tr>
-              <td className="p-2 border-b">Usuario 1</td>
-              <td className="p-2 border-b">vendedor</td>
+              <td className="p-2 border-b">Hombres</td>
+              <td className="p-2 border-b">Hombres</td>
               <td className="p-2 border-b">
-                <div className="flex">
+                <div className="flex justify-center">
                   <button
                     className="mr-2"
                     onClick={() => {
                       console.log("edit");
                     }}
                   >
-                    <BsPencilFill size={25} color="white" />
+                    <GoEye size={20} color="white" />
                   </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="p-2 border-b">Mujeres</td>
+              <td className="p-2 border-b">Mujeres</td>
+
+              <td className="p-2 border-b">
+                <div className="flex justify-center">
                   <button
+                    className="mr-2"
                     onClick={() => {
-                      console.log("delete");
+                      console.log("edit");
                     }}
                   >
-                    <BsTrash3Fill size={25} color="white" />
+                    <GoEye size={20} color="white" />
                   </button>
                 </div>
               </td>
@@ -163,77 +168,57 @@ const UsersPage = () => {
         >
           <ModalOverlay />
           <ModalContent className="m-2">
-            <ModalHeader>Crear Usuario</ModalHeader>
+            <ModalHeader>Agregar Banner</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
               <form onSubmit={handleOnSubmit}>
                 <div className="grid grid-cols-2 gap-4 m-2">
                   <div>
-                    <p className="text-start text-sm  text-black">
-                      Nombre <span className="text-red-500">*</span>
+                    <p className="text-start text-sm ml-2 text-black">
+                      Titulo<span className="text-red-500">*</span>
                     </p>
                     <input
                       name="name"
                       id="name"
                       type="text"
-                      placeholder="Ingrese nombre"
+                      placeholder="Ingrese nombre del producto"
                       className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-white  placeholder-gray-400 text-gray-500 focus:outline-none"
                       onChange={handleOnChange}
                       required
                     />
                   </div>
                   <div>
-                    <p className="text-start text-sm  text-black">Email</p>
-                    <input
-                      name="brand"
-                      id="brand"
-                      type="text"
-                      placeholder="email@email.com"
-                      className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-white  placeholder-gray-400 text-gray-500 focus:outline-none"
-                      onChange={handleOnChange}
-                    />
-                  </div>
-                  <div>
-                    <p className="text-start text-sm  text-black">
-                      Contraseña <span className="text-red-500">*</span>
+                    <p className="text-start text-sm ml-2 text-black">
+                      Categoria <span className="text-red-500">*</span>
                     </p>
-                    <input
-                      name="password"
-                      id="password"
-                      type="password"
-                      placeholder="••••••••"
-                      className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-white  placeholder-gray-400 text-gray-500 focus:outline-none"
-                      onChange={handleOnChange}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <p className="text-start text-sm  text-black w-full text-wrap">
-                      Confirmar contraseña
-                    </p>
-                    <input
-                      name="confirmPassword"
-                      id="confirmPassword"
-                      type="password"
-                      placeholder="••••••••"
-                      className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-white  placeholder-gray-400 text-gray-500 focus:outline-none"
-                      onChange={handleOnChange}
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <p className="text-start text-sm  text-black">Rol</p>
                     <select
-                      name="role"
-                      id="role_id"
+                      name="categorie"
+                      id="categorie"
+                      onChange={handleOnChange}
                       className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-white  placeholder-gray-400 text-gray-500 focus:outline-none"
+                      required
                     >
-                      <option value="default" defaultChecked disabled>
-                        Seleccione un rol
+                      <option disabled value="">
+                        Seleccione categoria
                       </option>
-                      <option value="admin">Administrador</option>
-                      <option value="employee">Empleado</option>
-                      <option value="customer">Consumidor</option>
+                      <option value="Hombres">Hombres</option>
+                      <option value="Mujeres">Mujeres</option>
+                      <option value="Deportes">Deportes</option>
+                      <option value="Accesorios">Accesorios</option>
+                      <option value="Niños">Niños</option>
                     </select>
+                  </div>
+                  <div className="w-full justify-center items-center flex flex-col col-span-2">
+                    <p className="text-black text-start ml-2">
+                      Imagen del Banner <span className="text-red-500">*</span>
+                    </p>
+                    <div className="grid w-full max-w-xs items-center gap-1.5">
+                      <input
+                        id="file"
+                        type="file"
+                        className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+                      />
+                    </div>
                   </div>
                 </div>
                 <ModalFooter>
@@ -253,4 +238,4 @@ const UsersPage = () => {
   );
 };
 
-export default UsersPage;
+export default BannersPage;
