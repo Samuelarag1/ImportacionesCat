@@ -92,8 +92,12 @@ const Header = () => {
                       <MenuList>
                         {user ? (
                           <>
-                            <MenuItem>Ir a mi perfil</MenuItem>
-                            <MenuItem>Mis compras</MenuItem>
+                            <MenuItem as="a" href="/profile">
+                              Ir a mi perfil
+                            </MenuItem>
+                            <MenuItem as="a" href="#">
+                              Mis compras
+                            </MenuItem>
                             <MenuItem onClick={handleLogOut}>
                               Cerrar sesion
                             </MenuItem>
@@ -106,7 +110,9 @@ const Header = () => {
                           </>
                         )}
                         {user.role == "admin" ? (
-                          <MenuItem>Panel de administracion</MenuItem>
+                          <MenuItem as="a" href="/admin/administration">
+                            Panel de administracion
+                          </MenuItem>
                         ) : (
                           ""
                         )}
