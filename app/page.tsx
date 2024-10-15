@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Banner from "../components/Banner";
 import ProductCard from "../components/ProductCard";
 import Sidebar from "../components/Sidebar";
-import banner1 from "/public/mens/banner1.jpeg";
+import banner1 from "/public/mens/banner1.webp";
 import banner2 from "/public/mens/banner2.webp";
 import women2 from "/public/women2.png";
 import women from "/public/women.png";

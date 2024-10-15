@@ -117,7 +117,7 @@ function Register() {
                   value={Users.email}
                   autoComplete="email"
                   onChange={handleOnChange}
-                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-gray-500 focus:outline-none"
+                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-black focus:outline-none"
                   placeholder="email@email.com"
                   required
                 />
@@ -133,7 +133,7 @@ function Register() {
                   autoComplete="password"
                   onChange={handleOnChange}
                   placeholder="••••••••"
-                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-gray-500 focus:outline-none"
+                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-black focus:outline-none"
                   required
                 />
               </div>
@@ -147,7 +147,7 @@ function Register() {
                   value={Users.confirmPassword}
                   onChange={handleOnChange}
                   placeholder="••••••••"
-                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-gray-500 focus:outline-none"
+                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-black focus:outline-none"
                   required
                 />
               </div>

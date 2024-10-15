@@ -6,7 +6,7 @@ import Banner from "../../../components/Banner";
 import ProductCard from "../../../components/ProductCard";
 import Sidebar from "../../../components/Sidebar";
 
-import banner1 from "/public/mens/banner1.jpeg";
+import banner1 from "/public/mens/banner1.webp";
 
 import Footer from "@/components/Footer";
 import IProduct from "@/Models/Products";

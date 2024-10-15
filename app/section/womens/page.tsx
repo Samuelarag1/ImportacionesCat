@@ -12,10 +12,10 @@ import girls2 from "/public/girls2.webp";
 
 //? ImagesCard
 
-import women1 from "/public/womens/women1.jpg";
-import women2 from "/public/womens/women2.jpg";
-import women3 from "/public/womens/women3.jpg";
-import women4 from "/public/womens/women4.jpg";
+import women1 from "/public/womens/women1.webp";
+import women2 from "/public/womens/women2.webp";
+import women3 from "/public/womens/women3.webp";
+import women4 from "/public/womens/women4.webp";
 import {
   ButtonBack,
   ButtonNext,
