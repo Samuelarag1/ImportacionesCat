@@ -2,7 +2,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { Link, Spinner, useToast } from "@chakra-ui/react";
+import { Center, Divider, Link, Spinner, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { valideRegister } from "./validate";
 
@@ -89,16 +89,26 @@ function Register() {
 
   return (
     <>
-      <div className="h-screen w-full bg-primary overflow-hidden">
+      <div className="flex flex-col min-h-screen">
         <Header />
-        <div className="flex-grow flex flex-col justify-center items-center bg-primary align-middle">
-          <div className="m-5 w-[95%] max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
+        <div className="flex-grow flex justify-around items-center bg-primary ">
+          <div className="hidden lg:flex lg:flex-col lg:items-center">
+            <h1 className="text-4xl font-title text-center">
+              Importaciones <br /> Catamarca
+            </h1>
+          </div>
+          <div className="hidden lg:flex">
+            <Center height="500px">
+              <Divider orientation="vertical" />
+            </Center>
+          </div>
+          <div className="m-4 w-[95%] max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8 ">
             <form className="space-y-6" onSubmit={register}>
-              <h5 className="text-xl font-medium text-white text-center md:text-left">
+              <h5 className="text-xl font-medium text-black text-center md:text-left">
                 Registrarse
               </h5>
               <div>
-                <label className="block mb-2 text-sm font-medium text-white">
+                <label className="block mb-2 text-sm font-medium text-black">
                   Email
                 </label>
                 <input
@@ -107,13 +117,13 @@ function Register() {
                   value={Users.email}
                   autoComplete="email"
                   onChange={handleOnChange}
-                  className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-gray-500 focus:outline-none"
                   placeholder="email@email.com"
                   required
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-white">
+                <label className="block mb-2 text-sm font-medium text-black">
                   Contraseña
                 </label>
                 <input
@@ -123,12 +133,12 @@ function Register() {
                   autoComplete="password"
                   onChange={handleOnChange}
                   placeholder="••••••••"
-                  className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-gray-500 focus:outline-none"
                   required
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-white">
+                <label className="block mb-2 text-sm font-medium text-black">
                   Confirmar Contraseña
                 </label>
                 <input
@@ -137,7 +147,7 @@ function Register() {
                   value={Users.confirmPassword}
                   onChange={handleOnChange}
                   placeholder="••••••••"
-                  className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-gray-500 focus:outline-none"
                   required
                 />
               </div>
@@ -146,34 +156,32 @@ function Register() {
               )}
               <button
                 type="submit"
-                className="w-full text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600"
+                className="w-full text-white hover:bg-black hover:transition hover:ease-in-out hover:duration-500 duration-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-900"
                 disabled={loading}
               >
                 {loading ? <Spinner size="sm" /> : "Crear cuenta"}
               </button>
 
-              <div className="text-sm font-medium text-gray-300 text-center">
+              <div className="text-sm font-medium text-gray-800 text-center">
                 ¿Ya tienes una cuenta?{" "}
                 <Link href="/login">
-                  <p className="hover:underline text-blue-500">
+                  <p className="hover:underline text-blue-600">
                     Iniciar sesión
                   </p>
                 </Link>
               </div>
             </form>
+            ;
           </div>
         </div>
-        <div className="absolute bottom-0 w-full">
-          <Footer />
-
-          <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
-        </div>
-        {loading && (
-          <div className="top-0 left-0 fixed z-50 h-screen w-screen flex items-center align-middle bg-black bg-opacity-80 justify-center">
-            <Spinner color="white" size={"xl"} />
-          </div>
-        )}
+        <Footer />
+        <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
       </div>
+      {loading && (
+        <div className="top-0 left-0 fixed z-50 h-screen w-screen flex items-center align-middle bg-black bg-opacity-80 justify-center">
+          <Spinner color="white" size={"xl"} />
+        </div>
+      )}
     </>
   );
 }

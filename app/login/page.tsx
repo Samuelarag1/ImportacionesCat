@@ -4,7 +4,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import { Spinner, useToast } from "@chakra-ui/react";
+import { Center, Divider, Spinner, useToast } from "@chakra-ui/react";
 import useUserStore from "@/store/userStore";
 import Cookies from "js-cookie";
 
@@ -118,14 +118,24 @@ const LoginPage = () => {
     <>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <div className="flex-grow flex flex-col justify-center items-center bg-primary shadow-2xl shadow-black">
-          <div className="m-4 w-[95%] max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
+        <div className="flex-grow flex justify-around items-center bg-primary ">
+          <div className="hidden lg:flex lg:flex-col lg:items-center">
+            <h1 className="text-4xl font-title text-center">
+              Importaciones <br /> Catamarca
+            </h1>
+          </div>
+          <div className="hidden lg:flex">
+            <Center height="500px">
+              <Divider orientation="vertical" />
+            </Center>
+          </div>
+          <div className="m-4 w-[95%] max-w-sm p-4 rounded-lg shadow sm:p-6 md:p-8 ">
             <form className="space-y-6" onSubmit={login}>
-              <h5 className="text-xl font-medium text-white text-center md:text-left">
+              <h5 className="text-xl font-medium text-black text-center md:text-left">
                 Iniciar sesión
               </h5>
               <div>
-                <label className="block mb-2 text-sm font-medium text-white">
+                <label className="block mb-2 text-sm font-medium text-black">
                   Email
                 </label>
                 <input
@@ -133,13 +143,13 @@ const LoginPage = () => {
                   name="email"
                   value={Users.email}
                   onChange={handleOnChange}
-                  className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-gray-500 focus:outline-none"
                   placeholder="email@email.com"
                   required
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-white">
+                <label className="block mb-2 text-sm font-medium text-black">
                   Contraseña
                 </label>
                 <input
@@ -148,7 +158,7 @@ const LoginPage = () => {
                   value={Users.password}
                   onChange={handleOnChange}
                   placeholder="••••••••"
-                  className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  className="border text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 bg-gray-300  placeholder-gray-400 text-gray-500 focus:outline-none"
                   required
                 />
               </div>
@@ -157,14 +167,14 @@ const LoginPage = () => {
               )}
               <button
                 type="submit"
-                className="w-full text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 "
+                className="w-full text-white hover:bg-black hover:transition hover:ease-in-out hover:duration-500 duration-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-900"
               >
                 Ingresa a tu cuenta
               </button>
-              <div className="text-sm font-medium text-gray-300 text-center">
+              <div className="text-sm font-medium text-gray-800 text-center">
                 No tienes cuenta?{" "}
                 <Link href="/register">
-                  <p className="hover:underline text-blue-500">Crear cuenta</p>
+                  <p className="hover:underline text-blue-600">Crear cuenta</p>
                 </Link>
               </div>
             </form>

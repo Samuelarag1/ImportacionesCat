@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="h-24 bg-gray-200 flex items-center justify-around lg:justify-around lg:h-40 shadow-lg shadow-black border-b-black border-b-4 lg:border-none">
+      <div className="h-24 bg-gray-200 flex items-center justify-around lg:justify-around lg:h-40  border-b-black border-b-1">
         <label className="lg:hidden">
           <div
             className="w-9 h-10 z-50 cursor-pointer flex flex-col items-center justify-center"
