@@ -15,7 +15,7 @@ function Profile() {
   const [toggle, setToggle] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUser>();
 
-  const getAllProducts = async () => {
+  const getUserByEmail = async () => {
     try {
       const response = await fetch(
         `http://localhost:3001/users/${user?.email}`,
@@ -36,7 +36,7 @@ function Profile() {
   };
 
   useEffect(() => {
-    getAllProducts();
+    getUserByEmail();
   }, []);
 
   return (

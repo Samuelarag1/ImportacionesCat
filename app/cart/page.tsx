@@ -1,13 +1,23 @@
 "use client";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import React, { useState } from "react";
+import dynamic from "next/dynamic"; // Para lazy loading
+import React, { useState, useMemo } from "react";
 import Image, { StaticImageData } from "next/image";
-//! images
+
+// Lazy load de componentes pesados
+const Header = dynamic(() => import("@/components/Header"), {
+  loading: () => <p>Cargando encabezado...</p>, // Componente de fallback
+});
+const Footer = dynamic(() => import("@/components/Footer"), {
+  loading: () => <p>Cargando pie de página...</p>,
+});
+const Sidebar = dynamic(() => import("@/components/Sidebar"), {
+  loading: () => <p>Cargando menú lateral...</p>,
+});
+
+//! Images
 import campera from "/public/camperas.png";
 import lompa from "/public/mens/lompa.png";
-import camisaco from "/public/womens/women2.jpg";
+import camisaco from "/public/womens/women2.webp";
 
 interface IProduct {
   id?: number;
@@ -51,10 +61,15 @@ const ShoppingCart: React.FC = () => {
     },
   ]);
 
-  const totalAmount = items.reduce(
-    (sum, item) =>
-      sum + parseFloat(item.price) * (1 - parseFloat(item.discount) / 100),
-    0
+  // Memoriza el cálculo total para evitar recálculos en cada render
+  const totalAmount = useMemo(
+    () =>
+      items.reduce(
+        (sum, item) =>
+          sum + parseFloat(item.price) * (1 - parseFloat(item.discount) / 100),
+        0
+      ),
+    [items]
   );
 
   const handleCheckout = () => {
@@ -68,7 +83,7 @@ const ShoppingCart: React.FC = () => {
   return (
     <div className="bg-primary h-screen">
       <Header />
-      <div className="bg-secondary p-4 rounded-lg shadow-lg w-full max-w-md mx-auto m-2 ">
+      <div className="bg-secondary p-4 rounded-lg shadow-lg w-full max-w-md mx-auto m-2">
         <h2 className="text-xl text-white font-bold mb-4 text-center">
           Carrito de Compras
         </h2>
@@ -87,30 +102,23 @@ const ShoppingCart: React.FC = () => {
                   <Image
                     src={item.imageUrl}
                     alt={item.name}
-                    className="h-10 w-10 object-cover mr-2" // Reducido tamaño de la imagen
-                    width={40} // Ajustado a tamaño menor
-                    height={40} // Ajustado a tamaño menor
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 object-cover mr-2"
+                    placeholder="blur"
                   />
                   <div className="flex-grow">
                     <div className="font-semibold text-white text-sm">
-                      {" "}
-                      {/* Reducido el tamaño del texto */}
                       {item.name}
                     </div>
                     <div className="text-xs text-gray-400">
-                      {" "}
-                      {/* Reducido el tamaño del texto */}
                       Marca: <span className="text-white">{item.brand}</span>
                     </div>
                     <div className="text-xs text-gray-400">
-                      {" "}
-                      {/* Reducido el tamaño del texto */}
                       Categoría:{" "}
                       <span className="text-white">{item.categorie}</span>
                     </div>
                     <div className="text-xs text-gray-400">
-                      {" "}
-                      {/* Reducido el tamaño del texto */}
                       Descuento:{" "}
                       <span className="text-white">{item.discount}</span>
                     </div>
@@ -120,7 +128,7 @@ const ShoppingCart: React.FC = () => {
                   </div>
                   <button
                     onClick={() => handleRemoveItem(item.id!)}
-                    className="ml-2 text-red-500 hover:text-red-700 text-xs" // Reducido el tamaño del texto
+                    className="ml-2 text-red-500 hover:text-red-700 text-xs"
                   >
                     Quitar
                   </button>
@@ -128,14 +136,12 @@ const ShoppingCart: React.FC = () => {
               ))}
             </ul>
             <div className="flex justify-between text-gray-300 font-semibold text-sm">
-              {" "}
-              {/* Reducido el tamaño del texto */}
               <span className="text-white">Total:</span>
               <span className="text-white">${totalAmount.toFixed(2)}</span>
             </div>
             <button
               onClick={handleCheckout}
-              className="mt-4 w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300 text-sm" // Reducido el tamaño del texto
+              className="mt-4 w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300 text-sm"
             >
               Proceder al Pago
             </button>
@@ -144,9 +150,7 @@ const ShoppingCart: React.FC = () => {
       </div>
 
       <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
-      <div className="absolute bottom-0 w-full">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };

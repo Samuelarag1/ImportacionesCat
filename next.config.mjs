@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: false, // Mantén la optimización de imágenes
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: "https",
@@ -14,26 +14,21 @@ const nextConfig = {
       {
         source: "/(.*)",
         headers: [
-          // {
-          //   key: "Content-Security-Policy",
-          //   value:
-          //     "default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; object-src 'none';",
-          // },
           {
             key: "X-Frame-Options",
-            value: "DENY", // Prevenir que la página sea embebida en iframes
+            value: "DENY",
           },
           {
             key: "X-Content-Type-Options",
-            value: "nosniff", // Evitar la detección de tipo MIME
+            value: "nosniff",
           },
           {
             key: "Referrer-Policy",
-            value: "no-referrer", // Controlar la política de referencia
+            value: "no-referrer",
           },
           {
             key: "Strict-Transport-Security",
-            value: "max-age=31536000; includeSubDomains; preload", // Seguridad de transporte estricta
+            value: "max-age=31536000; includeSubDomains; preload",
           },
         ],
       },
