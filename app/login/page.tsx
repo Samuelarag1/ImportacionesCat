@@ -129,7 +129,7 @@ const LoginPage = () => {
               <Divider orientation="vertical" />
             </Center>
           </div>
-          <div className="m-4 w-[95%] max-w-sm p-4 rounded-lg shadow sm:p-6 md:p-8 ">
+          <div className="m-4 w-[95%] max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8">
             <form className="space-y-6" onSubmit={login}>
               <h5 className="text-xl font-medium text-black text-center md:text-left">
                 Iniciar sesión

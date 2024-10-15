@@ -8,10 +8,10 @@ import { useParams } from "next/navigation";
 import IProduct from "@/Models/Products";
 
 function ProductDetail() {
-  const { id } = useParams(); // Extraemos solo el ID
+  const { id } = useParams();
   const [toggle, setToggle] = useState<boolean>(false);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [product, setProduct] = useState<IProduct | null>(null); // Permite que sea null inicialmente
+  const [product, setProduct] = useState<IProduct | null>(null);
 
   const getProductDetail = async () => {
     if (!id) return;
@@ -37,9 +37,6 @@ function ProductDetail() {
     setSelectedSize(selectedSize === size ? null : size);
   };
 
-  // Aquí puedes añadir los logs para verificar los valores
-  console.log("Product ID:", id);
-  console.log("Fetched Product:", product);
   const formatPrice = (price: string) => {
     const numberPrice = parseFloat(price);
     return `$${numberPrice
@@ -129,7 +126,9 @@ function ProductDetail() {
             </div>
           </div>
         </div>
-        <Footer />
+        <div className="absolute bottom-0 w-full">
+          <Footer />
+        </div>
       </main>
     </>
   );
