@@ -49,7 +49,7 @@ function ProductDetail() {
             Envios gratis a partir de los 80.000$
           </p>
         </div>
-        <Header onToggle={() => setToggle(!toggle)} />
+        <Header />
         <Sidebar isOpenSideBar={toggle} onClose={() => setToggle(false)} />
         <div className="font-sans bg-white">
           <div className="p-4 lg:max-w-7xl max-w-4xl mx-auto">

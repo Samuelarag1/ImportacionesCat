@@ -34,11 +34,18 @@ div {
     text-wrap: balance;
   }
 }
-
 @font-face {
 font-family: 'Playfair Display';
   src: url('/fonts/PlayfairDisplay-Regular.ttf') format('truetype'),
     url('/fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kanit';
+  src: url('/fonts/Kanit-ExtraLight.ttf') format('truetype'),
+  url('/fonts/Kanit-ExtraLight.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

@@ -38,7 +38,7 @@ function Administration() {
   return (
     <>
       <div className="bg-primary text-slate-300">
-        <Header onToggle={() => setToggle(!toggle)} />
+        <Header />
 
         <Breadcrumb
           className="m-4 h-10 align-middle flex text-white border-s-gray-200 border-[1px] rounded-lg"

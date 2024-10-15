@@ -21,7 +21,7 @@ const News: React.FC = () => {
           Envios gratis a partir de los 80.000$
         </p>
       </div>
-      <Header onToggle={() => setToggle(!toggle)} />
+      <Header />
 
       <div className="lg:hidden">
         <Banner src={banner2} alt="Banner Hombres" />

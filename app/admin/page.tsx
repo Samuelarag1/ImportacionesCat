@@ -10,7 +10,7 @@ function AdminDashboard() {
   return (
     <>
       <div className="min-h-screen bg-primary text-white">
-        <Header onToggle={() => setToggle(!toggle)} />
+        <Header />
 
         <h3 className="text-white text-center mt-5 text-3xl">
           Panel de administracion

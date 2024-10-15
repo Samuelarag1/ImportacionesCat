@@ -67,7 +67,7 @@ const ShoppingCart: React.FC = () => {
 
   return (
     <div className="bg-primary h-screen">
-      <Header onToggle={() => setToggle(!toggle)} />
+      <Header />
       <div className="bg-secondary p-4 rounded-lg shadow-lg w-full max-w-md mx-auto m-2 ">
         <h2 className="text-xl text-white font-bold mb-4 text-center">
           Carrito de Compras

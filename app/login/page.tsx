@@ -117,7 +117,7 @@ const LoginPage = () => {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <Header onToggle={() => setToggle(!toggle)} />
+        <Header />
         <div className="flex-grow flex flex-col justify-center items-center bg-primary shadow-2xl shadow-black">
           <div className="m-4 w-[95%] max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
             <form className="space-y-6" onSubmit={login}>

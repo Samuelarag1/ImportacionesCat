@@ -42,7 +42,7 @@ function Profile() {
   return (
     <>
       <div className="bg-primary min-h-screen w-full">
-        <Header onToggle={() => setToggle(!toggle)} />
+        <Header />
         <div className="flex flex-col justify-center align-top items-center mt-5">
           <Wrap>
             <WrapItem className="flex flex-col align-middle items-center justify-center mb-2">

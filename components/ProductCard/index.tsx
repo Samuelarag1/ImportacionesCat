@@ -1,7 +1,7 @@
-import { Button, useToast } from "@chakra-ui/react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import { FaShoppingCart } from "react-icons/fa";
+import { BsCart } from "react-icons/bs";
+import { GoEye } from "react-icons/go";
 
 interface ProductCardProps {
   id?: string;
@@ -18,46 +18,56 @@ const ProductCard: React.FC<ProductCardProps> = ({
   price,
   brand,
 }) => {
-  const toast = useToast();
+  const formatPrice = (price: string) => {
+    const numberPrice = parseFloat(price);
+    return `$${numberPrice
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00`;
+  };
 
   return (
-    <div className="max-w-sm w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden">
-      <Link href={`/products/${id}`}>
-        <div className="relative h-48 w-full">
-          <Image
-            src={imageSrc}
-            layout="fill"
-            objectFit="cover"
-            alt="Product Image"
-          />
+    <div className="max-w-xs overflow-hidden bg-white rounded-lg shadow-sm shadow-black">
+      <div className="relative group">
+        {" "}
+        <Image
+          width={100}
+          height={100}
+          className="object-cover w-full h-48 lg:h-80"
+          src={imageSrc}
+          alt="NIKE AIR"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div>
+            <Link
+              href="#"
+              className="bg-gray-700 p-3 rounded-full flex items-center justify-center"
+            >
+              <BsCart size={25} color="white" />
+            </Link>
+          </div>
+          <div>
+            <Link
+              href="#"
+              className="bg-gray-700 p-3 rounded-full flex items-center justify-center"
+            >
+              <GoEye size={25} color="white" />
+            </Link>
+          </div>
         </div>
-      </Link>
-      <div className="p-4 flex flex-col justify-between">
-        <div>
-          <h3 className="text-xl font-semibold text-white">{title}</h3>
-          <p className="text-sm font-bold text-gray-400">{brand}</p>
-          <span className="text-xl text-white">${price}</span>
-        </div>
-        <div className="flex justify-between mt-4">
-          <Button
-            bg={"green.500"}
-            onClick={() =>
-              toast({
-                title: "Agregado al carrito",
-                description:
-                  "Podes mirar tus articulos agregados en el carrito",
-                status: "success",
-                duration: 3000,
-              })
-            }
-          >
-            <FaShoppingCart color="black" size={50} />
-          </Button>
+      </div>
 
-          <button className="bg-blue-800 p-2 rounded-md w-full ml-2 text-xs text-white flex justify-center items-center border border-black shadow-lg hover:bg-blue-600 transition duration-150">
-            <Link href={`/products/${id}`}>Comprar</Link>
-          </button>
-        </div>
+      <div className="px-4 py-2">
+        <Link href={`/products/${id}`}>
+          <h1 className="text-xl text-gray-800 uppercase lg:text-2xl font-bold font-body2">
+            {title}
+          </h1>
+        </Link>
+        <p className="mt-1 text-sm text-gray-600 lg:text-lg font-body">
+          {brand}
+        </p>
+        <p className="text-lg font-bold text-black lg:text-2xl font-body">
+          {formatPrice(price)}
+        </p>
       </div>
     </div>
   );

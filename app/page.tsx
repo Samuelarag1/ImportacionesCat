@@ -46,13 +46,13 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-third w-screen">
+    <main className="min-h-screen bg-gray-200 w-screen">
       <div className="bg-black">
         <p className="text-xs text-center text-white lg:text-lg">
           Envios gratis a partir de los 80.000$
         </p>
       </div>
-      <Header onToggle={() => setToggle(!toggle)} />
+      <Header />
       {/* Mobile Version */}
       <div className="lg:hidden min-h-screen">
         <Banner src={banner1} alt="Banner Hombres" />
@@ -67,13 +67,13 @@ const Home: React.FC = () => {
         >
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center z-10">
-              <ButtonBack className="p-2 rounded-full shadow-lg">
-                <IoChevronBackCircleSharp size={32} color="white" />
+              <ButtonBack className="p-2 rounded-full">
+                <IoChevronBackCircleSharp color="black" size={32} />
               </ButtonBack>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center z-10">
-              <ButtonNext className="p-2 rounded-full shadow-lg">
-                <IoChevronForwardCircleSharp size={32} color="white" />
+              <ButtonNext className="p-2 rounded-full">
+                <IoChevronForwardCircleSharp size={32} />
               </ButtonNext>
             </div>
 
@@ -126,13 +126,13 @@ const Home: React.FC = () => {
         >
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center z-10">
-              <ButtonBack className="p-2 rounded-full shadow-lg">
-                <IoChevronBackCircleSharp size={32} color="white" />
+              <ButtonBack className="p-2 rounded-full ">
+                <IoChevronBackCircleSharp color="black" size={32} />
               </ButtonBack>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center z-10">
-              <ButtonNext className="p-2 rounded-full shadow-lg ">
-                <IoChevronForwardCircleSharp size={32} color="white" />
+              <ButtonNext className="p-2 rounded-full  ">
+                <IoChevronForwardCircleSharp size={32} />
               </ButtonNext>
             </div>
 
@@ -187,12 +187,12 @@ const Home: React.FC = () => {
           >
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center z-10">
-                <ButtonBack className="p-2 rounded-full shadow-lg">
-                  <IoChevronBackCircleSharp size={32} />
+                <ButtonBack className="p-2 rounded-full ">
+                  <IoChevronBackCircleSharp color="black" size={32} />
                 </ButtonBack>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center z-10">
-                <ButtonNext className="p-2 rounded-full shadow-lg">
+                <ButtonNext className="p-2 rounded-full ">
                   <IoChevronForwardCircleSharp size={32} />
                 </ButtonNext>
               </div>
@@ -245,12 +245,12 @@ const Home: React.FC = () => {
           >
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center z-10">
-                <ButtonBack className="p-2 rounded-full shadow-lg">
-                  <IoChevronBackCircleSharp size={32} />
+                <ButtonBack className="p-2 rounded-full ">
+                  <IoChevronBackCircleSharp color="black" size={32} />
                 </ButtonBack>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center z-10">
-                <ButtonNext className="p-2 rounded-full shadow-lg">
+                <ButtonNext className="p-2 rounded-full ">
                   <IoChevronForwardCircleSharp size={32} />
                 </ButtonNext>
               </div>

@@ -90,7 +90,7 @@ function Register() {
   return (
     <>
       <div className="h-screen w-full bg-primary overflow-hidden">
-        <Header onToggle={() => setToggle(!toggle)} />
+        <Header />
         <div className="flex-grow flex flex-col justify-center items-center bg-primary align-middle">
           <div className="m-5 w-[95%] max-w-sm p-4 border rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
             <form className="space-y-6" onSubmit={register}>

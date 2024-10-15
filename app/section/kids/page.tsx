@@ -57,7 +57,7 @@ const Home: React.FC = () => {
           Envios gratis a partir de los 80.000$
         </p>
       </div>
-      <Header onToggle={() => setToggle(!toggle)} />
+      <Header />
       {/* Mobile Version */}
       <div className="lg:hidden min-h-screen">
         <Banner src={kids_banner_1} alt="Banner Hombres" />
