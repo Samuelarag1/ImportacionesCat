@@ -171,7 +171,6 @@ function Register() {
                 </Link>
               </div>
             </form>
-            ;
           </div>
         </div>
         <Footer />
