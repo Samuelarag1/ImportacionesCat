@@ -118,13 +118,60 @@ const Header = () => {
             </Wrap>
           ) : (
             <>
-              <BsCart size={30} /> <FiUser size={30} />
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  icon={<BsCart size={30} />}
+                  aria-label="Options"
+                  variant="outline"
+                ></MenuButton>
+                <MenuList>
+                  <MenuItem>Carrito</MenuItem>
+                </MenuList>
+              </Menu>
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label="Options"
+                  variant="outline"
+                >
+                  <Avatar
+                    bg="blue.500"
+                    icon={<FiUser size={20} />}
+                    size={"sm"}
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem as="a" href="/login">
+                    Iniciar sesion
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </>
           )}
         </div>
         <div className="lg:flex items-center w-20 gap-2 hidden">
-          <BsCart size={50} />
-          <FaRegUser size={50} />
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              icon={<BsCart size={30} />}
+              aria-label="Options"
+              variant="outline"
+            ></MenuButton>
+            <MenuList>
+              <MenuItem>Carrito</MenuItem>
+            </MenuList>
+          </Menu>
+          <Menu>
+            <MenuButton as={IconButton} aria-label="Options" variant="outline">
+              <Avatar bg="blue.500" icon={<FiUser size={20} />} size={"sm"} />
+            </MenuButton>
+            <MenuList>
+              <MenuItem as="a" href="/login">
+                Iniciar sesion
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </div>
       </div>
 
