@@ -44,13 +44,16 @@ function Register() {
       };
 
       try {
-        const response = await fetch("http://localhost:3001/users", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        });
+        const response = await fetch(
+          "https://ecommerce-back-g7pr72bsl-samuels-projects-c50ca478.vercel.app/users",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+          }
+        );
 
         if (response.ok) {
           setTimeout(() => {
