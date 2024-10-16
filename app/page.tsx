@@ -19,7 +19,6 @@ import {
 import { useEffect, useState } from "react";
 
 import banner1 from "/public/mens/banner1.webp";
-// import banner2 from "/public/mens/banner2.webp";
 import women2 from "/public/women2.png";
 import women from "/public/women.png";
 import men1 from "/public/mens/men1.png";

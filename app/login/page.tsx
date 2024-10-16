@@ -90,7 +90,7 @@ const LoginPage = () => {
         setTimeout(() => {
           toast({
             title: "Inicio de sesion",
-            description: "Error al iniciar sesion, verifique sus datos ",
+            description: "Error al iniciar sesion, verifique sus datos",
             status: "error",
             duration: 9000,
             isClosable: true,

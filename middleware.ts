@@ -35,5 +35,5 @@ export function middleware(req: NextRequest) {
 
 // Definir las rutas donde quieres aplicar el middleware
 export const config = {
-  matcher: ["/admin/:path*"], // Aplica el middleware solo a las rutas que comienzan con /admin
+  matcher: ["/admin/:path*"],
 };

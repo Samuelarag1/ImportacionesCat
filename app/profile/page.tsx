@@ -10,7 +10,6 @@ import IUser from "@/Models/User";
 function Profile() {
   const { user } = useUserStore();
 
-  console.log(user);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUser>();
