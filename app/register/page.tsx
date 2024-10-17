@@ -77,7 +77,7 @@ function Register() {
           setLoading(false);
           toast({
             title: "Error al crear cuenta",
-            description: error.message || "Ocurrió un error inesperado.",
+            description: error.message || "Ocurrió un error inesperado",
             status: "error",
             duration: 9000,
             isClosable: true,
