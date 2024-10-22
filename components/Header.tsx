@@ -74,7 +74,9 @@ const Header = () => {
                         variant="outline"
                       ></MenuButton>
                       <MenuList>
-                        <MenuItem>Carrito</MenuItem>
+                        <MenuItem as="a" href="/cart">
+                          Carrito
+                        </MenuItem>
                       </MenuList>
                     </Menu>
                     <Menu>
@@ -132,7 +134,9 @@ const Header = () => {
                   variant="outline"
                 ></MenuButton>
                 <MenuList>
-                  <MenuItem>Carrito</MenuItem>
+                  <MenuItem as="a" href="/cart">
+                    Carrito
+                  </MenuItem>
                 </MenuList>
               </Menu>
               <Menu>
@@ -165,7 +169,9 @@ const Header = () => {
               variant="outline"
             ></MenuButton>
             <MenuList>
-              <MenuItem>Carrito</MenuItem>
+              <MenuItem as="a" href="/cart">
+                Carrito
+              </MenuItem>
             </MenuList>
           </Menu>
           <Menu>
