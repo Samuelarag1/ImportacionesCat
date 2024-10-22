@@ -93,9 +93,8 @@ const Home: React.FC = () => {
           className="h-80 m-5"
         >
           {products.map((product, index) => (
-            <div className="m-2  gap-10 flex">
+            <div className="m-2  gap-10 flex" key={index}>
               <ProductCard
-                key={index}
                 brand={product.brand}
                 imageSrc={product.imageSrc}
                 price={product.price}
@@ -117,9 +116,8 @@ const Home: React.FC = () => {
           className="h-80 m-5"
         >
           {products2.map((product, index) => (
-            <div className="m-2  gap-10 flex">
+            <div className="m-2  gap-10 flex" key={index}>
               <ProductCard
-                key={index}
                 brand={product.brand}
                 imageSrc={product.imageSrc}
                 price={product.price}
