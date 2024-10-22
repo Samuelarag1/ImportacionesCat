@@ -26,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className="max-w-xs overflow-hidden bg-white rounded-lg shadow-sm shadow-black">
+    <div className="w-48 max-w-xs overflow-hidden bg-white rounded-md rounded-b-sm shadow-sm shadow-black">
       <div className="relative group">
         {" "}
         <Image
@@ -55,7 +55,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
       </div>
-
       <div className="px-4 py-2">
         <Link href={`/products/${id}`}>
           <h1 className="text-xl text-gray-800 uppercase lg:text-2xl font-bold font-body2">

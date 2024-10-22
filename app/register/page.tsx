@@ -45,7 +45,9 @@ function Register() {
 
       try {
         const response = await fetch(
-          "https://ecommerce-back-g7pr72bsl-samuels-projects-c50ca478.vercel.app/users",
+          // "https://ecommerce-back-g7pr72bsl-samuels-projects-c50ca478.vercel.app/users",
+          "http://localhost:3000",
+
           {
             method: "POST",
             headers: {
@@ -67,7 +69,7 @@ function Register() {
               isClosable: true,
             });
           }, 1500);
-          window.location.href = "/login";
+          // window.location.href = "/login";
         } else {
           const data = await response.json();
           throw new Error(data.message || "Error al registrar el usuario");
