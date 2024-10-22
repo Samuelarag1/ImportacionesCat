@@ -16,18 +16,7 @@ import women1 from "/public/womens/women1.webp";
 import women2 from "/public/womens/women2.webp";
 import women3 from "/public/womens/women3.webp";
 import women4 from "/public/womens/women4.webp";
-import {
-  ButtonBack,
-  ButtonNext,
-  CarouselProvider,
-  DotGroup,
-  Slide,
-  Slider,
-} from "pure-react-carousel";
-import {
-  IoChevronBackCircleSharp,
-  IoChevronForwardCircleSharp,
-} from "react-icons/io5";
+
 import Footer from "@/components/Footer";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import { MdChevronRight } from "react-icons/md";
