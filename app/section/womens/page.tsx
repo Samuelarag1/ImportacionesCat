@@ -77,7 +77,7 @@ const Home: React.FC = () => {
             <option value="">Mas caro</option>
           </select>
         </div>
-        <div className="grid grid-cols-2 m-4 gap-2 lg:grid-cols-5">
+        <div className="grid grid-cols-2 m-2 gap-10 lg:grid-cols-5">
           <ProductCard
             imageSrc={women1}
             title="Remera"

@@ -24,8 +24,13 @@ import remera_lacoste from "/public/mens/remera-lacoste.webp";
 
 const products = [
   { imageSrc: chomba2, title: "Chomba", price: "40000", brand: "Penguin" },
+  {
+    imageSrc: bermuda_blue,
+    title: "Bermuda",
+    price: "35000",
+    brand: "Bermuda premier",
+  },
   { imageSrc: chomba, title: "Chomba", price: "52000", brand: "brand" },
-  { imageSrc: bermuda_blue, title: "Remera", price: "3500", brand: "brand" },
   { imageSrc: bermuda_green, title: "Remera", price: "500", brand: "brand" },
 ];
 const products2 = [
@@ -51,17 +56,13 @@ const products2 = [
 ];
 
 const responsive = {
-  superLargeDesktop: {
+  desktop: {
     breakpoint: { max: 4000, min: 3000 },
     items: 5,
   },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-  },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 3,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -82,18 +83,25 @@ const Home: React.FC = () => {
       <Header />
 
       <div className="min-h-screen overflow-hidden">
-        <Banner src={banner1} alt="Banner Hombres" />
+        <div className="relative h-fit">
+          <div className="h-full w-full absolute flex justify-center  items-center m-0 z-10">
+            <p className="text-white text-4xl font-bold font-body  drop-shadow-2xl shadow-black">
+              Novedades
+            </p>
+          </div>
+          <Banner src={banner1} alt="Banner Hombres" />
+        </div>
+
         <Carousel
           responsive={responsive}
           ssr
           showDots
           infinite
           removeArrowOnDeviceType={["tablet", "mobile"]}
-          dotListClass="custom-dot-list-style"
-          className="h-80 m-5"
+          className="h-[350px] m-5 mt-0"
         >
           {products.map((product, index) => (
-            <div className="m-2  gap-10 flex" key={index}>
+            <div className="m-2 flex" key={index}>
               <ProductCard
                 brand={product.brand}
                 imageSrc={product.imageSrc}
@@ -104,7 +112,14 @@ const Home: React.FC = () => {
           ))}
         </Carousel>
 
-        <Banner src={banner2} alt="Banner Hombres" />
+        <div className="relative h-fit">
+          <div className="h-full w-full absolute flex justify-center  items-center m-0 z-10">
+            <p className="text-white text-4xl font-bold font-body  drop-shadow-2xl shadow-black">
+              Novedades
+            </p>
+          </div>
+          <Banner src={banner2} alt="Banner Hombres" />
+        </div>
 
         <Carousel
           responsive={responsive}
@@ -112,11 +127,10 @@ const Home: React.FC = () => {
           showDots
           infinite
           removeArrowOnDeviceType={["tablet", "mobile"]}
-          dotListClass="custom-dot-list-style"
-          className="h-80 m-5"
+          className="h-[350px] m-5"
         >
           {products2.map((product, index) => (
-            <div className="m-2  gap-10 flex" key={index}>
+            <div className="m-2 flex" key={index}>
               <ProductCard
                 brand={product.brand}
                 imageSrc={product.imageSrc}
