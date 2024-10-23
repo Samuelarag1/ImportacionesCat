@@ -15,6 +15,8 @@ interface CartState {
   items: CartItem[];
   addItem: (item: CartItem) => void;
   removeItem: (id: string) => void;
+  increaseQuantity: (id: string) => void;
+  decreaseQuantity: (id: string) => void;
 }
 
 const useCartStore = create(
@@ -35,13 +37,31 @@ const useCartStore = create(
               ),
             };
           } else {
-            return { items: [...state.items, newItem] };
+            return { items: [...state.items, { ...newItem, quantity: 1 }] }; // Iniciar cantidad en 1
           }
         }),
       removeItem: (id) =>
         set((state) => ({
           items: state.items.filter((item) => item.id !== id),
         })),
+      increaseQuantity: (id) =>
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+          ),
+        })),
+      decreaseQuantity: (id) =>
+        set((state) => {
+          const existingItem = state.items.find((item) => item.id === id);
+          if (existingItem && existingItem.quantity > 1) {
+            return {
+              items: state.items.map((item) =>
+                item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+              ),
+            };
+          }
+          return state; // No hacer nada si la cantidad es 1
+        }),
     }),
     {
       name: "cart-storage",

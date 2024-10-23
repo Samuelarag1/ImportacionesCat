@@ -203,14 +203,16 @@ const Header = () => {
                           key={product.id}
                           className="h-fit w-full flex justify-between items-center p-2"
                         >
-                          <div className="flex items-center gap-2">
-                            <Image
-                              src={product.picture}
-                              alt="alt"
-                              width={50}
-                              height={50}
-                              className="object-cover w-full h-14 lg:h-80 rounded-md"
-                            />
+                          <div className="flex items-center gap-2 align-middle">
+                            <div className="h-20 w-20">
+                              <Image
+                                src={product.picture}
+                                alt="alt"
+                                width={50}
+                                height={50}
+                                className="object-cover w-full h-full lg:h-80 rounded-md"
+                              />
+                            </div>
                             <div>
                               <p className="font-bold font-body text-lg">
                                 {product.name}

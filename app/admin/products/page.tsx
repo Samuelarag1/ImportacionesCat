@@ -1,8 +1,6 @@
 // pages/usuarios.tsx
 "use client";
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import ModalAdd from "@/components/Modals/ModalAdd/index";
-import ModalConfirmDialog from "@/components/Modals/Modal";
 import {
   Button,
   Modal,
@@ -14,11 +12,7 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { MdChevronRight } from "react-icons/md";
-import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { IoMdAddCircleOutline } from "react-icons/io";
-import { BsPencilFill, BsTrash3Fill } from "react-icons/bs";
 import IProduct from "@/Models/Products";
 import { GoEye } from "react-icons/go";
 
