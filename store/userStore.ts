@@ -1,5 +1,6 @@
 import IUser from "@/Models/User";
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { useEffect } from "react";
 
 interface UserState {
@@ -8,23 +9,24 @@ interface UserState {
   clearUser: () => void;
 }
 
-const useUserStore = create<UserState>((set) => ({
-  user: null,
-  setUser: (user) => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("user", JSON.stringify(user));
+const useUserStore = create(
+  persist<UserState>(
+    (set) => ({
+      user: null,
+      setUser: (user) => {
+        set({ user });
+      },
+      clearUser: () => {
+        set({ user: null });
+      },
+    }),
+    {
+      name: "user-storage",
+      storage: createJSONStorage(() => localStorage),
     }
-    set({ user });
-  },
-  clearUser: () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("user");
-    }
-    set({ user: null });
-  },
-}));
+  )
+);
 
-// Hook para inicializar el estado del usuario desde localStorage
 export const useInitializeUserStore = () => {
   const { setUser } = useUserStore();
 

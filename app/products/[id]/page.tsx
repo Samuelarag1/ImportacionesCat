@@ -58,9 +58,9 @@ function ProductDetail() {
             <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] p-6 rounded-lg">
               <div className="lg:col-span-3 w-full lg:sticky top-0 text-center">
                 <div className="px-4 py-10 rounded-lg shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)]">
-                  {product?.imageUrl && (
+                  {product?.picture && (
                     <Image
-                      src={product.imageUrl}
+                      src={product.picture}
                       alt="Product"
                       className="w-full h-auto rounded object-cover"
                       objectFit="cover"

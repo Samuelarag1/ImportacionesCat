@@ -29,15 +29,13 @@ const BannersPage = () => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
-  //!Manejo del FORMULARIO
-
   const [product, setProduct] = useState<IProduct>({
     name: "",
     price: "",
     sizes: [],
     brand: "",
     discount: 0,
-    imageUrl: "",
+    picture: "",
     subCategorie: "",
     categorie: "",
   });
@@ -79,21 +77,35 @@ const BannersPage = () => {
       setPreviewImage(URL.createObjectURL(file));
     }
   };
-
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.append("name", product.name);
-    formData.append("brand", product.brand);
-    formData.append("categorie", product.categorie);
-    formData.append("price", product.price);
-    formData.append("discount", product.discount.toString());
-    formData.append("subCategorie", product.subCategorie);
+    // Asegurarte de que los campos no son vacíos antes de añadirlos a formData
+    if (product.name) {
+      formData.append("name", product.name);
+    }
+    if (product.brand) {
+      formData.append("brand", product.brand);
+    }
+    if (product.categorie) {
+      formData.append("categorie", product.categorie);
+    }
+    if (product.price) {
+      formData.append("price", product.price);
+    }
+    if (typeof product.discount === "number") {
+      formData.append("discount", product.discount.toString());
+    }
+    if (product.subCategorie) {
+      formData.append("subCategorie", product.subCategorie);
+    }
 
     // Añadiendo tamaños y stock al formulario
     selectedSizes.forEach((size) => {
-      formData.append("sizes[]", JSON.stringify({ size, stock }));
+      if (stock !== undefined) {
+        formData.append("sizes[]", JSON.stringify({ size, stock }));
+      }
     });
 
     if (image) {
@@ -107,6 +119,7 @@ const BannersPage = () => {
     //   body: formData,
     // });
   };
+
   return (
     <>
       <div className="h-screen bg-primary text-black">

@@ -36,7 +36,7 @@ const UsersPage = () => {
     sizes: [],
     brand: "",
     discount: 0,
-    imageUrl: "",
+    picture: "",
     subCategorie: "",
     categorie: "",
   });
@@ -83,16 +83,31 @@ const UsersPage = () => {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.append("name", product.name);
-    formData.append("brand", product.brand);
-    formData.append("categorie", product.categorie);
-    formData.append("price", product.price);
-    formData.append("discount", product.discount.toString());
-    formData.append("subCategorie", product.subCategorie);
+    // Asegurarte de que los campos no son vacíos antes de añadirlos a formData
+    if (product.name) {
+      formData.append("name", product.name);
+    }
+    if (product.brand) {
+      formData.append("brand", product.brand);
+    }
+    if (product.categorie) {
+      formData.append("categorie", product.categorie);
+    }
+    if (product.price) {
+      formData.append("price", product.price);
+    }
+    if (typeof product.discount === "number") {
+      formData.append("discount", product.discount.toString());
+    }
+    if (product.subCategorie) {
+      formData.append("subCategorie", product.subCategorie);
+    }
 
     // Añadiendo tamaños y stock al formulario
     selectedSizes.forEach((size) => {
-      formData.append("sizes[]", JSON.stringify({ size, stock }));
+      if (stock !== undefined) {
+        formData.append("sizes[]", JSON.stringify({ size, stock }));
+      }
     });
 
     if (image) {

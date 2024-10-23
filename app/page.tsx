@@ -23,33 +23,55 @@ import zapas_premium from "/public/mens/zapas-premier.webp";
 import remera_lacoste from "/public/mens/remera-lacoste.webp";
 
 const products = [
-  { imageSrc: chomba2, title: "Chomba", price: "40000", brand: "Penguin" },
   {
-    imageSrc: bermuda_blue,
-    title: "Bermuda",
+    id: "1",
+    picture: chomba2,
+    name: "Chomba",
+    price: "40000",
+    brand: "Penguin",
+  },
+  {
+    id: "2",
+    picture: bermuda_blue,
+    name: "Bermuda",
     price: "35000",
     brand: "Bermuda premier",
   },
-  { imageSrc: chomba, title: "Chomba", price: "52000", brand: "brand" },
-  { imageSrc: bermuda_green, title: "Remera", price: "500", brand: "brand" },
+  { id: "3", picture: chomba, name: "Chomba", price: "52000", brand: "brand" },
+  {
+    id: "4",
+    picture: bermuda_green,
+    name: "Remera",
+    price: "500",
+    brand: "brand",
+  },
 ];
 const products2 = [
-  { imageSrc: bermuda_gamir, title: "Bermuda", price: "25000", brand: "Gamir" },
   {
-    imageSrc: zapas_premium,
-    title: "Zapatillas",
+    id: "5",
+    picture: bermuda_gamir,
+    name: "Bermuda",
+    price: "25000",
+    brand: "Gamir",
+  },
+  {
+    id: "6",
+    picture: zapas_premium,
+    name: "Zapatillas",
     price: "52000",
     brand: "Puma",
   },
   {
-    imageSrc: remera_black,
-    title: "Remera",
+    id: "7",
+    picture: remera_black,
+    name: "Remera",
     price: "35000",
     brand: "Balenciaga",
   },
   {
-    imageSrc: remera_lacoste,
-    title: "Remera",
+    id: "8",
+    picture: remera_lacoste,
+    name: "Remera",
     price: "25000",
     brand: "Lacoste",
   },
@@ -102,12 +124,7 @@ const Home: React.FC = () => {
         >
           {products.map((product, index) => (
             <div className="m-2 flex" key={index}>
-              <ProductCard
-                brand={product.brand}
-                imageSrc={product.imageSrc}
-                price={product.price}
-                title={product.title}
-              />
+              <ProductCard {...product} />
             </div>
           ))}
         </Carousel>
@@ -131,12 +148,7 @@ const Home: React.FC = () => {
         >
           {products2.map((product, index) => (
             <div className="m-2 flex" key={index}>
-              <ProductCard
-                brand={product.brand}
-                imageSrc={product.imageSrc}
-                price={product.price}
-                title={product.title}
-              />
+              <ProductCard {...product} />
             </div>
           ))}
         </Carousel>

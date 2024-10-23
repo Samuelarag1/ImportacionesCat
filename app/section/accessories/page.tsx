@@ -86,9 +86,9 @@ const Accesories: React.FC = () => {
                   {products.map((product, i) => (
                     <ProductCard
                       brand={product.brand}
-                      imageSrc={product.imageUrl}
+                      picture={product.picture}
                       price={product.price}
-                      title={product.name}
+                      name={product.name}
                       id={product.id}
                       key={i}
                     />

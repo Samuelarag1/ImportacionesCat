@@ -17,12 +17,15 @@ import {
 } from "@chakra-ui/react";
 import useUserStore from "@/store/userStore";
 import { FiUser } from "react-icons/fi";
-
-import bermuda_gamir from "/public/mens/Bermuda-Gamir-Black.webp";
 import { MdChevronRight } from "react-icons/md";
+import useCartStore from "@/store/cartStore";
+import IProduct from "@/Models/Products";
+import { CartItem } from "@/Models/CartItem";
+
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user, clearUser } = useUserStore();
+  const { items, removeItem } = useCartStore();
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -30,6 +33,13 @@ const Header = () => {
   const handleLogOut = () => {
     clearUser();
   };
+
+  const handleDeleteItem = (id: string) => {
+    if (window.confirm("¿Estás seguro de que deseas eliminar este artículo?")) {
+      removeItem(id);
+    }
+  };
+
   const categories = {
     Hombres: "mens",
     Mujeres: "womens",
@@ -41,6 +51,7 @@ const Header = () => {
   return (
     <>
       <div className="h-24 bg-gray-200 flex items-center justify-around lg:justify-around lg:h-40  border-b-black border-b-1">
+        {/* Sidebar toggle button */}
         <label className="lg:hidden">
           <div
             className="w-9 h-10 z-50 cursor-pointer flex flex-col items-center justify-center"
@@ -78,37 +89,50 @@ const Header = () => {
                         variant="outline"
                       ></MenuButton>
                       <MenuList>
-                        <div className="h-20 w-full flex justify-between items-center p-2">
-                          <div className="flex items-center gap-2">
-                            <Image
-                              src={bermuda_gamir}
-                              alt="alt"
-                              width={40}
-                              height={60}
-                              className="object-cover w-full h-14 lg:h-80 rounded-md"
-                            />
-                            <div>
-                              <p className="font-bold font-body text-lg">
-                                Nombre
-                              </p>
-                              <p className="font-body text-gray-600 text-md">
-                                brand
-                              </p>
-                              <strong className="font-body text-black ">
-                                $100
+                        <div className="h-fit w-full flex justify-between items-center p-2 flex-col">
+                          {items.length ? (
+                            items.map((product) => (
+                              <div
+                                key={product.id}
+                                className="h-fit w-full flex justify-between items-center p-2"
+                              >
+                                <div className="flex items-center gap-2">
+                                  <Image
+                                    src={product.picture}
+                                    alt="alt"
+                                    width={50}
+                                    height={50}
+                                    className="object-cover w-full h-14 lg:h-80 rounded-md"
+                                  />
+                                  <div>
+                                    <p className="font-bold font-body text-lg">
+                                      {product.name}
+                                    </p>
+                                    <p className="font-body text-gray-600 text-md">
+                                      {product.brand}
+                                    </p>
+                                    <strong className="font-body text-black ">
+                                      ${product.price}
+                                    </strong>
+                                  </div>
+                                </div>
+                                <div>
+                                  <button
+                                    className="bg-red-600 rounded-full p-1"
+                                    onClick={() => handleDeleteItem(product.id)}
+                                  >
+                                    <FaRegTrashAlt size={20} color="white" />
+                                  </button>
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <>
+                              <strong className="text-xs">
+                                Agrega algo al carrito
                               </strong>
-                            </div>
-                          </div>
-                          <div>
-                            <button
-                              className="bg-red-600 rounded-full p-1"
-                              onClick={() =>
-                                alert("Estas por eliminar este articulo")
-                              }
-                            >
-                              <FaRegTrashAlt size={20} color="white" />
-                            </button>
-                          </div>
+                            </>
+                          )}
                         </div>
                         <hr />
                         <MenuItem as="a" href="/cart">
@@ -172,31 +196,50 @@ const Header = () => {
                   variant="outline"
                 ></MenuButton>
                 <MenuList>
-                  <div className="h-20 w-full flex justify-between items-center p-2">
-                    <div className="flex items-center gap-2">
-                      <Image
-                        src={bermuda_gamir}
-                        alt="alt"
-                        width={40}
-                        height={60}
-                        className="object-cover w-full h-14 lg:h-80 rounded-md"
-                      />
-                      <div>
-                        <p className="font-bold font-body text-lg">Nombre</p>
-                        <p className="font-body text-gray-600 text-md">brand</p>
-                        <strong className="font-body text-black ">$100</strong>
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        className="bg-red-600 rounded-full p-1"
-                        onClick={() =>
-                          alert("Estas por eliminar este articulo")
-                        }
-                      >
-                        <FaRegTrashAlt size={20} color="white" />
-                      </button>
-                    </div>
+                  <div className="h-fit w-full flex justify-between items-center p-2 flex-col">
+                    {items.length ? (
+                      items.map((product) => (
+                        <div
+                          key={product.id}
+                          className="h-fit w-full flex justify-between items-center p-2"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Image
+                              src={product.picture}
+                              alt="alt"
+                              width={50}
+                              height={50}
+                              className="object-cover w-full h-14 lg:h-80 rounded-md"
+                            />
+                            <div>
+                              <p className="font-bold font-body text-lg">
+                                {product.name}
+                              </p>
+                              <p className="font-body text-gray-600 text-md">
+                                {product.brand}
+                              </p>
+                              <strong className="font-body text-black ">
+                                ${product.price}
+                              </strong>
+                            </div>
+                          </div>
+                          <div>
+                            <button
+                              className="bg-red-600 rounded-full p-1"
+                              onClick={() => handleDeleteItem(product.id)}
+                            >
+                              <FaRegTrashAlt size={20} color="white" />
+                            </button>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <>
+                        <strong className="text-xs">
+                          Agrega algo al carrito
+                        </strong>
+                      </>
+                    )}
                   </div>
                   <hr />
                   <MenuItem
@@ -228,56 +271,6 @@ const Header = () => {
               </Menu>
             </>
           )}
-        </div>
-        <div className="lg:flex items-center w-20 gap-2 hidden">
-          <Menu>
-            <MenuButton
-              as={IconButton}
-              icon={<BsCart size={30} />}
-              aria-label="Options"
-              variant="outline"
-            ></MenuButton>
-            <MenuList>
-              <div className="h-20 w-full flex justify-between items-center p-2">
-                <div className="flex items-center gap-2">
-                  <Image
-                    src={bermuda_gamir}
-                    alt="alt"
-                    width={40}
-                    height={60}
-                    className="object-cover w-full h-14 lg:h-80 rounded-md"
-                  />
-                  <div>
-                    <p className="font-bold font-body text-lg">Nombre</p>
-                    <p className="font-body text-gray-600 text-md">brand</p>
-                    <strong className="font-body text-black ">$100</strong>
-                  </div>
-                </div>
-                <div>
-                  <button
-                    className="bg-red-600 rounded-full p-1"
-                    onClick={() => alert("Estas por eliminar este articulo")}
-                  >
-                    <FaRegTrashAlt size={20} color="white" />
-                  </button>
-                </div>
-              </div>
-              <hr />
-              <MenuItem as="a" href="/cart">
-                Ver mi carrito <MdChevronRight color="gray" size={25} />
-              </MenuItem>
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton as={IconButton} aria-label="Options" variant="outline">
-              <Avatar bg="blue.500" icon={<FiUser size={20} />} size={"sm"} />
-            </MenuButton>
-            <MenuList>
-              <MenuItem as="a" href="/login">
-                Iniciar sesion
-              </MenuItem>
-            </MenuList>
-          </Menu>
         </div>
       </div>
 

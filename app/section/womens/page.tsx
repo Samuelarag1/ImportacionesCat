@@ -78,74 +78,74 @@ const Home: React.FC = () => {
         </div>
         <div className="grid grid-cols-2 m-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full max-w-[1200px] mx-auto justify-items-center ">
           <ProductCard
-            imageSrc={women1}
-            title="Remera"
+            picture={women1}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women2}
-            title="Remera"
+            picture={women2}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women4}
-            title="Remera"
+            picture={women4}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women3}
-            title="Remera"
+            picture={women3}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women1}
-            title="Remera"
+            picture={women1}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women2}
-            title="Remera"
+            picture={women2}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women4}
-            title="Remera"
+            picture={women4}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women3}
-            title="Remera"
+            picture={women3}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women1}
-            title="Remera"
+            picture={women1}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women2}
-            title="Remera"
+            picture={women2}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women4}
-            title="Remera"
+            picture={women4}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />
           <ProductCard
-            imageSrc={women3}
-            title="Remera"
+            picture={women3}
+            name="Remera"
             price={"1500"}
             brand="brand"
           />

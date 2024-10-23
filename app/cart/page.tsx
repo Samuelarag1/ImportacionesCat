@@ -5,8 +5,8 @@ import useCartStore from "@/store/cartStore";
 import React from "react";
 
 const Cart: React.FC = () => {
-  const { items, removeItem, updateQuantity, clearCart } = useCartStore();
-
+  const { items, removeItem } = useCartStore();
+  console.log(items);
   return (
     <>
       <div className="h-screen">
@@ -21,14 +21,6 @@ const Cart: React.FC = () => {
                 <li key={item.id}>
                   <p>{item.name}</p>
                   <p>Precio: ${item.price}</p>
-                  <input
-                    type="number"
-                    value={item.quantity}
-                    min="1"
-                    onChange={(e) =>
-                      updateQuantity(item.id, parseInt(e.target.value, 10))
-                    }
-                  />
                   <button onClick={() => removeItem(item.id)}>Eliminar</button>
                 </li>
               ))}
@@ -36,11 +28,11 @@ const Cart: React.FC = () => {
           )}
           {items.length > 0 && (
             <>
-              <button onClick={clearCart}>Vaciar carrito</button>
+              <button>Vaciar carrito</button>
               <p>
                 Total: $
                 {items.reduce(
-                  (total, item) => total + item.price * item.quantity,
+                  (total, item) => total + parseInt(item.price) * item.quantity,
                   0
                 )}
               </p>
