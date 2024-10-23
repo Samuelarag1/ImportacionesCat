@@ -49,7 +49,6 @@ const Home: React.FC = () => {
         </p>
       </div>
       <Header />
-      {/* Mobile Version */}
       <div className=" min-h-screen">
         <Banner src={girls} alt="Banner Hombres" />
         <Breadcrumb
@@ -77,7 +76,7 @@ const Home: React.FC = () => {
             <option value="">Mas caro</option>
           </select>
         </div>
-        <div className="grid grid-cols-2 m-2 gap-10 lg:grid-cols-5">
+        <div className="grid grid-cols-2 m-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 w-full max-w-[1200px] mx-auto justify-items-center ">
           <ProductCard
             imageSrc={women1}
             title="Remera"

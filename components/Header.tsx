@@ -1,7 +1,8 @@
-import { FaRegUser } from "react-icons/fa";
+import { FaRegTrashAlt, FaRegUser } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 import { BsCart } from "react-icons/bs";
 import {
   Avatar,
@@ -16,6 +17,9 @@ import {
 } from "@chakra-ui/react";
 import useUserStore from "@/store/userStore";
 import { FiUser } from "react-icons/fi";
+
+import bermuda_gamir from "/public/mens/Bermuda-Gamir-Black.webp";
+import { MdChevronRight } from "react-icons/md";
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user, clearUser } = useUserStore();
@@ -74,8 +78,42 @@ const Header = () => {
                         variant="outline"
                       ></MenuButton>
                       <MenuList>
+                        <div className="h-20 w-full flex justify-between items-center p-2">
+                          <div className="flex items-center gap-2">
+                            <Image
+                              src={bermuda_gamir}
+                              alt="alt"
+                              width={40}
+                              height={60}
+                              className="object-cover w-full h-14 lg:h-80 rounded-md"
+                            />
+                            <div>
+                              <p className="font-bold font-body text-lg">
+                                Nombre
+                              </p>
+                              <p className="font-body text-gray-600 text-md">
+                                brand
+                              </p>
+                              <strong className="font-body text-black ">
+                                $100
+                              </strong>
+                            </div>
+                          </div>
+                          <div>
+                            <button
+                              className="bg-red-600 rounded-full p-1"
+                              onClick={() =>
+                                alert("Estas por eliminar este articulo")
+                              }
+                            >
+                              <FaRegTrashAlt size={20} color="white" />
+                            </button>
+                          </div>
+                        </div>
+                        <hr />
                         <MenuItem as="a" href="/cart">
-                          Carrito
+                          Ver mi carrito{" "}
+                          <MdChevronRight color="gray" size={25} />
                         </MenuItem>
                       </MenuList>
                     </Menu>
@@ -134,8 +172,39 @@ const Header = () => {
                   variant="outline"
                 ></MenuButton>
                 <MenuList>
-                  <MenuItem as="a" href="/cart">
-                    Carrito
+                  <div className="h-20 w-full flex justify-between items-center p-2">
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src={bermuda_gamir}
+                        alt="alt"
+                        width={40}
+                        height={60}
+                        className="object-cover w-full h-14 lg:h-80 rounded-md"
+                      />
+                      <div>
+                        <p className="font-bold font-body text-lg">Nombre</p>
+                        <p className="font-body text-gray-600 text-md">brand</p>
+                        <strong className="font-body text-black ">$100</strong>
+                      </div>
+                    </div>
+                    <div>
+                      <button
+                        className="bg-red-600 rounded-full p-1"
+                        onClick={() =>
+                          alert("Estas por eliminar este articulo")
+                        }
+                      >
+                        <FaRegTrashAlt size={20} color="white" />
+                      </button>
+                    </div>
+                  </div>
+                  <hr />
+                  <MenuItem
+                    as="a"
+                    href="/cart"
+                    className="flex justify-between"
+                  >
+                    Ver mi carrito <MdChevronRight color="gray" size={25} />
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -169,8 +238,33 @@ const Header = () => {
               variant="outline"
             ></MenuButton>
             <MenuList>
+              <div className="h-20 w-full flex justify-between items-center p-2">
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={bermuda_gamir}
+                    alt="alt"
+                    width={40}
+                    height={60}
+                    className="object-cover w-full h-14 lg:h-80 rounded-md"
+                  />
+                  <div>
+                    <p className="font-bold font-body text-lg">Nombre</p>
+                    <p className="font-body text-gray-600 text-md">brand</p>
+                    <strong className="font-body text-black ">$100</strong>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    className="bg-red-600 rounded-full p-1"
+                    onClick={() => alert("Estas por eliminar este articulo")}
+                  >
+                    <FaRegTrashAlt size={20} color="white" />
+                  </button>
+                </div>
+              </div>
+              <hr />
               <MenuItem as="a" href="/cart">
-                Carrito
+                Ver mi carrito <MdChevronRight color="gray" size={25} />
               </MenuItem>
             </MenuList>
           </Menu>
