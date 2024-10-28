@@ -148,7 +148,7 @@ const Header = () => {
                         variant="outline"
                       >
                         <Avatar
-                          bg="blue.500"
+                          bg="black"
                           icon={<FiUser size={20} />}
                           size={"sm"}
                         />
@@ -259,11 +259,7 @@ const Header = () => {
                   aria-label="Options"
                   variant="outline"
                 >
-                  <Avatar
-                    bg="blue.500"
-                    icon={<FiUser size={20} />}
-                    size={"sm"}
-                  />
+                  <Avatar bg="black" icon={<FiUser size={20} />} size={"sm"} />
                 </MenuButton>
                 <MenuList>
                   <MenuItem as="a" href="/login">

@@ -161,7 +161,7 @@ function Register() {
               )}
               <button
                 type="submit"
-                className="w-full text-white hover:bg-black hover:transition hover:ease-in-out hover:duration-500 duration-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-900"
+                className="w-full text-white hover:bg-black hover:transition hover:ease-in-out hover:duration-500 duration-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-black"
                 disabled={loading}
               >
                 {loading ? <Spinner size="sm" /> : "Crear cuenta"}
@@ -170,7 +170,7 @@ function Register() {
               <div className="text-sm font-medium text-gray-800 text-center">
                 ¿Ya tienes una cuenta?{" "}
                 <Link href="/login">
-                  <p className="hover:underline text-blue-600">
+                  <p className="hover:underline text-blue-800">
                     Iniciar sesión
                   </p>
                 </Link>
